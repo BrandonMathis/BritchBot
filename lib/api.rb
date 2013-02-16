@@ -1,6 +1,11 @@
 require 'net/http'
 
 module GroupMe
+  def self.key
+    config_file = Rails.root.join 'config', 'api.yml'
+    yml = YAML.load_file(config_file)
+    return yml['key']
+  end
 
   def self.groups
     url = "https://api.groupme.com/v3/groups"
@@ -31,7 +36,7 @@ module GroupMe
   private
   def self.build_request_uri(uri, params = {})
     params.delete_if { |k, v| v.blank? }
-    params.merge!({ token: KEY })
+    params.merge!({ token: key })
     params = params.collect { |key, value| "#{key.to_s}=#{value}" }.join('&')
     uri + '?' + params
   end
