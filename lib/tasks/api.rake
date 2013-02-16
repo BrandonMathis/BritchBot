@@ -1,5 +1,6 @@
 require Rails.root.join 'lib', 'api'
+require 'json'
 
 task :get_groups do
-  ap GroupMe.groups.body
+  ap JSON.parse GroupMe.groups.body
 end
