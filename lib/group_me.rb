@@ -1,6 +1,11 @@
 require 'net/http'
 
 module GroupMe
+  def self.get_messages(group_id)
+    url = "https://api.groupme.com/v3/groups/#{group_id}/messages"
+    make_ssl_request(url)
+  end
+
   def self.key
     config_file = Rails.root.join 'config', 'api.yml'
     yml = YAML.load_file(config_file)
@@ -15,7 +20,6 @@ module GroupMe
    #add params and key using something in net http
   def self.make_ssl_request(request_uri, params = {})
     request_uri = build_request_uri(request_uri, params)
-    ap request_uri
     uri = URI.parse(request_uri)
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true

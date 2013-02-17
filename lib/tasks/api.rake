@@ -1,6 +1,3 @@
-require Rails.root.join 'lib', 'api'
-require 'json'
-
-task :get_groups do
+task :get_groups => [:environment] do
   ap JSON.parse GroupMe.groups.body
 end
