@@ -1,7 +1,12 @@
 module Bot
   class << self
+    # Just a temporary thing for now. The Bot should respond
+    # in all groups it is a member of once it has its own account
     def group; "3647885" end
 
+    # Define all regex keys and association actions here
+    #
+    # Actions can be found at lib/bot/actions
     def keyword_actions
       [
         {key: /\/mfw/, action: "my_face"}
