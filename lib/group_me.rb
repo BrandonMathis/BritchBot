@@ -52,8 +52,7 @@ module GroupMe
   def self.image_message(image)
     {
       message: {
-        sournce_guid: UUID.generate,
-        text: image,
+        text: image
       }
     }
   end
