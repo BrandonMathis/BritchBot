@@ -13,16 +13,22 @@ module Bot
       ]
     end
 
-    def parse_messages
+    # Returns: a list of group ids Bot is a member of
+    def get_group_ids
+    end
+
+    # Returns: a list of text messages
+    def obtain_new_messages(group_ids)
       response_json = JSON.parse(GroupMe.get_messages(group).body)
-      actions = extract_messages(response_json)
+      extract_messages(response_json)
+    end
+
+    def parse_messages(messages)
       messages.each do |message|
-        action = extract_action message
+        action = extract_action message if message =~ /^\//
         reply = Bot::Actions.send(action)
         GroupMe.send_message(group, reply)
       end
-      return true if actions
-      false
     end
 
     def extract_action(message)
@@ -33,7 +39,11 @@ module Bot
     end
 
     def extract_messages(message_hash)
-      message_hash["response"]["messages"].map{ |message| message["text"] }
+      message_hash["response"]["messages"].map do |message|
+        next if Message.where(groupme_id: message["id"]).present?
+        Message.create(groupme_id: message["id"])
+        message["text"]
+      end
     end
   end
 end

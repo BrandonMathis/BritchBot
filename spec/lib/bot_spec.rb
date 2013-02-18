@@ -1,6 +1,31 @@
 require 'spec_helper'
 
 describe BritchBot do
+  describe '.extract_messages' do
+    let(:messages_json) { {
+      "response" => {
+        "messages" => [
+          {
+            "id" => "1234",
+            "text" => "Hello"
+          },
+          {
+            "id" => "5678",
+            "text" => "Goodbye"
+          }
+        ]
+      }
+    }}
+
+    before do
+      @response = Bot.extract_messages(messages_json)
+    end
+
+    it 'comes back with the array of messages' do
+      @response.should == ["Hello", "Goodbye"]
+    end
+  end
+
   describe '.extract_actions' do
     let(:messages) { "/mfw" }
 
@@ -10,16 +35,6 @@ describe BritchBot do
 
     it 'has the mfw action' do
       @actions.should == "my_face"
-    end
-  end
-
-  describe '.parse_messages' do
-    before do
-      @keywords_found = Bot.parse_messages
-    end
-
-    it 'finds keywords' do
-      @keywords_found.should be_true
     end
   end
 end
