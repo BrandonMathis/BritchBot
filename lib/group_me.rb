@@ -31,11 +31,11 @@ module GroupMe
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     case opts[:action]
-    when "Get" || blank?
-      request = Net::HTTP::Get.new(uri.request_uri)
     when "Post"
       request = Net::HTTP::Post.new(uri.request_uri)
       request.body = opts[:body].to_json
+    else
+      request = Net::HTTP::Get.new(uri.request_uri)
     end
     response = http.request(request)
   end
