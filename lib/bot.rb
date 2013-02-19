@@ -9,8 +9,8 @@ module Bot
     # Actions can be found at lib/bot/actions
     def keyword_actions
       [
-        {key: /\/mfw/, action: "mfw"},
-        {key: /\/bacon/, action: "bacon"},
+        # {key: /\/mfw/, action: "mfw"},
+        # {key: /\/bacon/, action: "bacon"},
         {key: /^\/(\w+)/, action: "jpg"}
       ]
     end
