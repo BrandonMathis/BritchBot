@@ -2,11 +2,6 @@ require 'net/http'
 
 module Bot
   module Actions
-    def self.jpgTo
-
-    end
-
-    # TODO Need to actually get some rand mfw images
     def self.jpg(key)
       uri = URI.parse("http://#{key}.jpg.to/+r")
       begin
