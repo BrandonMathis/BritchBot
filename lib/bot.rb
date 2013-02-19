@@ -9,7 +9,8 @@ module Bot
     # Actions can be found at lib/bot/actions
     def keyword_actions
       [
-        {key: /\/mfw/, action: "my_face"}
+        {key: /\/mfw/, action: "mfw"},
+        {key: /\/bacon/, action: "bacon"}
       ]
     end
 
@@ -17,18 +18,24 @@ module Bot
     def get_group_ids
     end
 
-    # Returns: a list of text messages
-    def obtain_new_messages(group_ids)
-      response_json = JSON.parse(GroupMe.get_messages(group).body)
-      extract_messages(response_json)
-    end
-
     def parse_messages(messages)
       messages.each do |message|
         action = extract_action message if message =~ /^\//
-        reply = Bot::Actions.send(action)
-        GroupMe.send_message(group, reply)
+        if action
+          reply = Bot::Actions.send(action)
+          GroupMe.send_message(group, reply)
+        end
       end
+    end
+
+    # Returns: a list of text messages
+    def extract_new_messages(messages)
+      message_hash = JSON.parse(messages)
+      message_hash["response"]["messages"].map do |message|
+        next if Message.where(groupme_id: message["id"]).present?
+        Message.create(groupme_id: message["id"])
+        message["text"]
+      end.compact
     end
 
     def extract_action(message)
@@ -36,14 +43,6 @@ module Bot
         return keyword_action[:action] if message =~ keyword_action[:key]
       end
       return false
-    end
-
-    def extract_messages(message_hash)
-      message_hash["response"]["messages"].map do |message|
-        next if Message.where(groupme_id: message["id"]).present?
-        Message.create(groupme_id: message["id"])
-        message["text"]
-      end
     end
   end
 end

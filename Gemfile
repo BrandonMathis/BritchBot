@@ -7,6 +7,8 @@ gem 'sqlite3'
 gem 'jquery-rails'
 gem 'rack', '1.4.1'
 gem 'uuid'
+gem 'delayed_job_active_record'
+gem "daemons"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

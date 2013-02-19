@@ -9,12 +9,8 @@ module Bot
       GroupMe.image_message("http://i.imgur.com/qSWNG8V.png")
     end
 
-    def self.rage
-
+    def self.bacon
+      GroupMe.image_message("http://i.imgur.com/LgMb5Gm.png")
     end
-
-    def self.leaderBoard
-
-   end
   end
 end
