@@ -39,8 +39,14 @@ module Bot
       end.compact
     end
 
+    # Come back with a hash of action methods and params
+    #
+    # ie:
+    # {method: 'jpg', param: 'baconpancake'}
     def extract_action(message)
       keyword_actions.each do |keyword_action|
+        # match for key and capture the params if there is a capture
+        # inside of the regex
         if params = message.scan(keyword_action[:key]).flatten.first
           return {method: keyword_action[:action], param: params}
         end
