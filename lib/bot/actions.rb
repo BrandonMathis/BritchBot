@@ -1,10 +1,10 @@
 module Bot
   module Actions
-    # TODO Need to actually get some rand mfw images
     def self.jpgTo
 
     end
 
+    # TODO Need to actually get some rand mfw images
     def self.mfw
       GroupMe.image_message("http://i.imgur.com/qSWNG8V.png")
     end
@@ -13,7 +13,7 @@ module Bot
 
     end
 
-   def self.leaderBoard
+    def self.leaderBoard
 
    end
   end
