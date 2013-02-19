@@ -2,10 +2,6 @@ require 'net/http'
 
 module Bot
   module Actions
-    def self.jpgTo
-
-    end
-
     # Return image message hash for groupme
     #
     # ie:
