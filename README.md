@@ -23,14 +23,20 @@ Other ideas:
 - Feed word into a jpg.to image search
 - How to access: 
 > /RandomWord.format
+
 > /mfw 
+
 > /String.rage
 
 - Examples:
 > /Brandon           = returns brandon.jpg.to/r
+
 > /Brandon.gif       = returns brandon.jpg.to/r+gif
+
 > /mfw               = returns random mfw
+
 > /happy.rage        = returns happy rage face
+
 > /RandomString.rage = returns close enough
 
 
