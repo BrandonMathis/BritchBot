@@ -10,7 +10,8 @@ module Bot
     def keyword_actions
       [
         {key: /\/mfw/, action: "mfw"},
-        {key: /\/bacon/, action: "bacon"}
+        {key: /\/bacon/, action: "bacon"},
+        {key: /^\/(\w+)/, action: "jpg"}
       ]
     end
 
@@ -22,7 +23,7 @@ module Bot
       messages.each do |message|
         action = extract_action message if message =~ /^\//
         if action
-          reply = Bot::Actions.send(action)
+          reply = Bot::Actions.send(action[:method], action[:param])
           GroupMe.send_message(group, reply)
         end
       end
@@ -40,7 +41,9 @@ module Bot
 
     def extract_action(message)
       keyword_actions.each do |keyword_action|
-        return keyword_action[:action] if message =~ keyword_action[:key]
+        if params = message.scan(keyword_action[:key]).flatten.first
+          return {method: keyword_action[:action], param: params}
+        end
       end
       return false
     end

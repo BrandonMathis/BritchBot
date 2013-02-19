@@ -26,15 +26,25 @@ describe BritchBot do
     end
   end
 
-  describe '.extract_actions' do
-    let(:messages) { "/mfw" }
-
+  describe '.extract_action' do
     before do
-      @actions = Bot.extract_action(messages)
+      @action = Bot.extract_action(message)
     end
 
-    it 'has the mfw action' do
-      @actions.should == "my_face"
+    context 'mfw' do
+      let(:message) { "/mfw" }
+
+      it 'has the mfw action' do
+        @action.should == "my_face"
+      end
+    end
+
+    context 'when given the wildcard jpg' do
+      let(:message) { "/something" }
+
+      it "has the jpg action with the something param" do
+        @action.should == {method: "jpg", param: "something"}
+      end
     end
   end
 end
