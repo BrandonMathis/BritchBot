@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe GroupMe do
   describe '.send_message' do
-    let(:message) { Bot::Actions.mfw }
+    let(:message) { Bot::Actions.jpg("bacon") }
 
     before do
       @response = GroupMe.send_message(GROUP_ID, message)

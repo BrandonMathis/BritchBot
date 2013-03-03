@@ -15,10 +15,10 @@ describe BritchBot do
           }
         ]
       }
-    }}
+    }.to_json }
 
     before do
-      @response = Bot.extract_messages(messages_json)
+      @response = Bot.extract_new_messages(messages_json)
     end
 
     it 'comes back with the array of messages' do
@@ -35,7 +35,7 @@ describe BritchBot do
       let(:message) { "/mfw" }
 
       it 'has the mfw action' do
-        @action.should == "my_face"
+        @action[:method].should == "jpg"
       end
     end
 

@@ -9,8 +9,6 @@ module Bot
     # Actions can be found at lib/bot/actions
     def keyword_actions
       [
-        # {key: /\/mfw/, action: "mfw"},
-        # {key: /\/bacon/, action: "bacon"},
         {key: /^\/(\w+)/, action: "jpg"}
       ]
     end
@@ -19,6 +17,8 @@ module Bot
     def get_group_ids
     end
 
+    # Parse over array of message and send proper response
+    # to GroupMe
     def parse_messages(messages)
       messages.each do |message|
         action = extract_action message if message =~ /^\//
