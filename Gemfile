@@ -10,7 +10,6 @@ gem 'uuid'
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'hpricot'
-gem "daemons"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
