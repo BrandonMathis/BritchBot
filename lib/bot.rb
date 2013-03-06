@@ -34,7 +34,7 @@ module Bot
       message_hash = JSON.parse(messages)
       message_hash["response"]["messages"].map do |message|
         next if Message.where(groupme_id: message["id"]).present?
-        Message.create(groupme_id: message["id"])
+        Message.create(groupme_id: message["id"], text: message["text"])
         message["text"]
       end.compact
     end
